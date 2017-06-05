@@ -1,10 +1,10 @@
-## Oystercard
+# Oystercard
 
 This is a repeat of the [oystercard-challenge](https://github.com/makersacademy/course/tree/master/oystercard) written Ruby. You can find my original Ruby solution [at this repo](https://github.com/Tmgree/OysterCard).
 
 I have aimed to solve this challenge in a test driven manner with automated tests using the unittest library.
 
-# Installation Instructions
+## Installation Instructions
 
 Clone the repository then change directory into it.
 
@@ -15,9 +15,9 @@ $ cd OysterCard_Challenge
 
 Now you can use the oystercard system.
 
-# Usage Instructions
+## Usage Instructions
 
-# Brief
+## Brief
 
 
 
