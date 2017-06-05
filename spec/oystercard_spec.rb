@@ -32,4 +32,12 @@ describe Oystercard do
 
   end
 
+  describe '#in_journey' do
+
+    it 'should default be out' do
+      expect(subject.status).to eq false
+    end
+
+  end
+
 end
