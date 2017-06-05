@@ -4,7 +4,7 @@ This is a repeat of the [oystercard-challenge](https://github.com/makersacademy/
 
 I have aimed to solve this challenge in a test driven manner with automated tests using the unittest library.
 
-## Installation Instructions
+# Installation Instructions
 
 Clone the repository then change directory into it.
 
@@ -15,13 +15,13 @@ $ cd OysterCard_Challenge
 
 Now you can use the oystercard system.
 
-##Usage Instructions
+# Usage Instructions
 
-##Brief
+# Brief
 
 
 
-###User Stories
+### User Stories
 
 ```
 In order to use public transport
