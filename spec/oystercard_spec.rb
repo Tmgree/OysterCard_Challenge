@@ -47,6 +47,10 @@ describe Oystercard do
       expect{ subject.touch_in }.to change{ subject.traveling }.to true
     end
 
+    it 'should fail if a card attempts to start a journey with low funds' do
+      expect{ subject.touch_in }.to raise_error "Not enough money on card"
+    end
+
   end
 
   describe '#touch_out' do
