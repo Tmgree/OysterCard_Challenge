@@ -10,6 +10,14 @@ describe Oystercard do
 
   end
 
+  describe '#traveling' do
+
+    it 'should initialize as not traveling' do
+      expect( subject.traveling ).to eq false
+    end
+
+  end
+
   describe '#top_up' do
 
     it 'must top up the cards balance' do
@@ -32,10 +40,21 @@ describe Oystercard do
 
   end
 
-  describe '#in_journey' do
+  describe '#touch_in' do
 
-    it 'should default be out' do
-      expect(subject.status).to eq false
+    it 'should initialize a journey' do
+      expect{ subject.touch_in }.to change{ subject.traveling }.to true
+    end
+
+  end
+
+
+
+  describe '#touch_out' do
+
+    it 'should end a journey' do
+      subject.touch_in
+      expect{ subject.touch_out }.to change{ subject.traveling }.to false
     end
 
   end
