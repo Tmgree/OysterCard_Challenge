@@ -43,18 +43,26 @@ describe Oystercard do
   describe '#touch_in' do
 
     it 'should initialize a journey' do
+      subject.top_up(10)
       expect{ subject.touch_in }.to change{ subject.traveling }.to true
     end
 
   end
 
-
-
   describe '#touch_out' do
 
     it 'should end a journey' do
+      subject.top_up(10)
       subject.touch_in
       expect{ subject.touch_out }.to change{ subject.traveling }.to false
+    end
+
+  end
+
+  describe '#balance_too_low?' do
+
+    it 'should return true if balance is under MIN_BALANCE' do
+      expect(subject.balance_too_low?).to eq true
     end
 
   end

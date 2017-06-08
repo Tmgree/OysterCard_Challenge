@@ -3,6 +3,7 @@ class Oystercard
   attr_reader :balance
   attr_reader :traveling
   CARD_LIMIT = 90
+  MIN_BALANCE = 1
 
   def initialize
     @balance = 0
@@ -24,6 +25,10 @@ class Oystercard
 
   def touch_out
     @traveling=false
+  end
+
+  def balance_too_low?
+    @balance < MIN_BALANCE
   end
 
 end
