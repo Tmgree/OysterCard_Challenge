@@ -71,4 +71,13 @@ describe Oystercard do
 
   end
 
+  describe '#deduct_fare' do
+
+    it 'should deduct the travel fare' do
+      subject.top_up(10)
+      expect{subject.touch_out}.to change{ subject.balance }.by -(Oystercard::MIN_FARE)
+    end
+
+  end
+
 end
