@@ -21,15 +21,15 @@ class Oystercard
     @balance -= n
   end
 
-  def touch_in(station)
+  def touch_in(entry_station)
     fail "Not enough money on card" if balance_too_low?
     @traveling=true
-    @journey.push(station)
+    push_station(entry_station)
   end
 
-  def touch_out
+  def touch_out(exit_station)
     deduct_fare
-    @journey.clear
+    push_station(exit_station)
     @traveling=false
   end
 
@@ -43,6 +43,16 @@ class Oystercard
 
   def entry_station
     @journey[0]
+  end
+
+  def exit_station
+    @journey[1]
+  end
+
+  private
+
+  def push_station(station)
+    @journey.push(station)
   end
 
 end

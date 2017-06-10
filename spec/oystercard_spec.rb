@@ -2,6 +2,9 @@ require 'oystercard'
 
 describe Oystercard do
 
+  let(:entry_station) { double :station }
+  let(:exit_station) { double :station }
+
   describe '#balance' do
 
     it 'must initialize with a balnce of 0' do
@@ -43,14 +46,12 @@ describe Oystercard do
   describe '#touch_in' do
 
     it 'should initialize a journey' do
-      station = double(:station)
       subject.top_up(10)
-      expect{ subject.touch_in(station) }.to change{ subject.traveling }.to true
+      expect{ subject.touch_in(entry_station) }.to change{ subject.traveling }.to true
     end
 
     it 'should fail if a card attempts to start a journey with low funds' do
-      station = double(:station)
-      expect{ subject.touch_in(station) }.to raise_error "Not enough money on card"
+      expect{ subject.touch_in(entry_station) }.to raise_error "Not enough money on card"
     end
 
   end
@@ -58,10 +59,9 @@ describe Oystercard do
   describe '#touch_out' do
 
     it 'should end a journey' do
-      station = double(:station)
       subject.top_up(10)
-      subject.touch_in(station)
-      expect{ subject.touch_out }.to change{ subject.traveling }.to false
+      subject.touch_in(entry_station)
+      expect{ subject.touch_out(exit_station) }.to change{ subject.traveling }.to false
     end
 
   end
@@ -78,7 +78,7 @@ describe Oystercard do
 
     it 'should deduct the travel fare' do
       subject.top_up(10)
-      expect{subject.touch_out}.to change{ subject.balance }.by -(Oystercard::MIN_FARE)
+      expect{subject.touch_out(exit_station)}.to change{ subject.balance }.by -(Oystercard::MIN_FARE)
     end
 
   end
@@ -86,11 +86,22 @@ describe Oystercard do
   describe '#entry_station' do
 
     it 'should display the journeys entry station' do
-      station = double(:station)
       subject.top_up(10)
-      subject.touch_in(station)
-      expect(subject.entry_station).to eq station
+      subject.touch_in(entry_station)
+      expect(subject.entry_station).to eq entry_station
     end
+
+  end
+
+  describe '#exit_station' do
+
+    it 'should display the journeys exit station' do
+      subject.top_up(10)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.exit_station).to eq exit_station
+    end
+
   end
 
 end
