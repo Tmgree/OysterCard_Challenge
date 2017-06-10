@@ -43,12 +43,14 @@ describe Oystercard do
   describe '#touch_in' do
 
     it 'should initialize a journey' do
+      station = double(:station)
       subject.top_up(10)
-      expect{ subject.touch_in }.to change{ subject.traveling }.to true
+      expect{ subject.touch_in(station) }.to change{ subject.traveling }.to true
     end
 
     it 'should fail if a card attempts to start a journey with low funds' do
-      expect{ subject.touch_in }.to raise_error "Not enough money on card"
+      station = double(:station)
+      expect{ subject.touch_in(station) }.to raise_error "Not enough money on card"
     end
 
   end
@@ -56,8 +58,9 @@ describe Oystercard do
   describe '#touch_out' do
 
     it 'should end a journey' do
+      station = double(:station)
       subject.top_up(10)
-      subject.touch_in
+      subject.touch_in(station)
       expect{ subject.touch_out }.to change{ subject.traveling }.to false
     end
 
@@ -78,6 +81,16 @@ describe Oystercard do
       expect{subject.touch_out}.to change{ subject.balance }.by -(Oystercard::MIN_FARE)
     end
 
+  end
+
+  describe '#entry_station' do
+
+    it 'should display the journeys entry station' do
+      station = double(:station)
+      subject.top_up(10)
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq station
+    end
   end
 
 end
