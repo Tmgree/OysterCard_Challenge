@@ -29,6 +29,7 @@ class Oystercard
   def touch_out(exit_station)
     deduct_fare
     push_station(exit_station)
+    push_hash(@current_journey)
     @traveling=false
   end
 
@@ -52,6 +53,10 @@ class Oystercard
 
   def push_station(station)
     @current_journey.push(station)
+  end
+
+  def push_hash(current_journey)
+    @journeys["journey #{journeys.size + 1}"] = current_journey
   end
 
 end
