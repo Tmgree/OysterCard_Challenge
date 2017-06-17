@@ -28,13 +28,13 @@ describe Oystercard do
       expect( subject.journeys ).to be_empty
     end
 
-    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+
 
     it 'stores a journey' do
       subject.top_up(Oystercard::MIN_FARE)
       subject.touch_in(entry_station)
       subject.touch_out(exit_station)
-      expect(subject.journeys).to include journey
+      expect(subject.journeys).to include "journey 1" => [entry_station, exit_station]
     end
 
   end
